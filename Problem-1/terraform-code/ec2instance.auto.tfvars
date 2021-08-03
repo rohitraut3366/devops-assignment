@@ -1,4 +1,4 @@
 # EC2 Instance Variables
 instance_type    = "t2.micro"
 instance_keypair = "devops"
-instance_count   = 1
+instance_count   = 2
