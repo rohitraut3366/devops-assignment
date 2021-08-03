@@ -1,28 +1,5 @@
 ---
 # tasks file for wordpress
-#
-- name: Installing HTTPD packages
-  package:
-    name: httpd
-    state: present
-
-- name: unarchive wordpress file
-  unarchive:
-    src: https://wordpress.org/latest.tar.gz
-    dest: .
-    remote_src: true
-
-- name: move data to document root
-  copy:
-    src: wordpress/
-    dest: /var/www/html
-    remote_src: true
-
-- name: copying worpress template
-  template:
-    src: wp-config.php
-    dest: /var/www/html/wp-config.php
-
 - name: Installing php7.2
   command: amazon-linux-extras install php7.2 -y
   changed_when: false
