@@ -1,17 +1,9 @@
-- hosts: tag_Name_ansible
-  roles:
-    - role: mariadb
-      vars:
-        - database: "wpdb"
-        - database_user: "rohit"
-        - database_user_password: "3366"
-        - hostname: "localhost"
-    
-- hosts: tag_Name_ansible
+- hosts: all
+  vars_files: rds_database_password
   roles:  
     - role: wordpress
       vars:
-        - database: "wpdb"
-        - database_user: "rohit"
-        - database_user_password: "3366"
-        - hostname: "localhost"
+        - database: "wordpress_db"
+        - database_user: "root"
+        - database_user_password: "{{ database_password }}"
+        - hostname: "terraform-20210803123134985600000001.chrpy8wuqlfu.ap-south-1.rds.amazonaws.com"

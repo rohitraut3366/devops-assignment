@@ -41,6 +41,7 @@ resource "aws_db_instance" "rds_instace" {
   delete_automated_backups   = var.rds_delete_automated_backups
   publicly_accessible        = var.rds_database_publicly_access
   vpc_security_group_ids     = [aws_security_group.sg_mysql.id]
+  skip_final_snapshot        = true
   tags = {
     "name"     = "wordpress-db"
     "frontend" = "wordpress"
