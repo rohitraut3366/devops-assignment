@@ -1,0 +1,17 @@
+- hosts: tag_Name_ansible
+  roles:
+    - role: mariadb
+      vars:
+        - database: "wpdb"
+        - database_user: "rohit"
+        - database_user_password: "3366"
+        - hostname: "localhost"
+    
+- hosts: tag_Name_ansible
+  roles:  
+    - role: wordpress
+      vars:
+        - database: "wpdb"
+        - database_user: "rohit"
+        - database_user_password: "3366"
+        - hostname: "localhost"
