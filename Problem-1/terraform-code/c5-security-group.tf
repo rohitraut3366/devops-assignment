@@ -1,25 +1,8 @@
 # AWS SG for webserver that allow HTTP 80 and SSH 22 port
 
-resource "aws_security_group" "sg-web" {
+resource "aws_security_group" "sg_web" {
   name        = "web"
   description = "Allow default web server port"
-
-  ingress {
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Allow Port 80"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-
-  }
-
-  ingress {
-    description = "Allow Port 443"
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
 
   egress {
     description = "Allow all ip and ports outbound"
@@ -34,19 +17,30 @@ resource "aws_security_group" "sg-web" {
   }
 }
 
+# security group rule for HTTP port
+resource "aws_security_group_rule" "http_rule" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.sg_web.id
+}
+
+# security group rule for HTTPS port
+resource "aws_security_group_rule" "secure_http_rule" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.sg_web.id
+}
+
 # AWS SG for webserver that allow HTTP 80 and SSH 22 port
-resource "aws_security_group" "sg-ssh" {
+resource "aws_security_group" "sg_ssh" {
   name        = "SSH"
   description = "VPC SSH"
-
-  ingress {
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Allow Port 80"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-
-  }
 
   egress {
     description = "Allow all ip and ports outbound"
@@ -59,4 +53,13 @@ resource "aws_security_group" "sg-ssh" {
   tags = {
     Name = "sg-ssh"
   }
+}
+
+resource "aws_security_group_rule" "ssh_rule" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.sg_ssh.id
 }

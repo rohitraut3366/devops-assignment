@@ -17,3 +17,9 @@ variable "instance_count" {
   type        = number
   default     = 1
 }
+
+variable "aws_instance_ami" {
+  description = "AMI"
+  type        = string
+  default     = ""
+}

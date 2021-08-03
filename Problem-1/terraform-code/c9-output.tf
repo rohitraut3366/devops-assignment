@@ -6,3 +6,7 @@ output "amzlinux" {
 output "instance_public_ip" {
   value = aws_instance.myec2_webserver.*.public_ip
 }
+
+output "rds_address" {
+  value = aws_db_instance.rds_instace.address
+}
