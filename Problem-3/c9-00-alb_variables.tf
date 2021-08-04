@@ -65,7 +65,6 @@ variable "alb_internal" {
 
 variable "vpc_id" {
   type = string
-  default = ""
 }
 
 variable "force_destroy" { 

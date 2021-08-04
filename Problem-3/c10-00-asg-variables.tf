@@ -1,9 +1,3 @@
-variable "asg_template_image_id" {
-  description = "template image id"
-  type = string
-  default = ""
-}
-
 variable "asg_template_instance_type" { 
   description = "auto scaling group template instance type"
   type = string

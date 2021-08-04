@@ -1,8 +1,10 @@
 resource "aws_launch_template" "asg_template" {
+  depends_on = [aws_ami_from_instance.nginx-wordpress]
   name_prefix   = var.prefix
-  image_id      = var.asg_template_image_id
+  image_id      = aws_ami_from_instance.nginx-wordpress.id
   instance_type = var.asg_template_instance_type
   vpc_security_group_ids = [aws_security_group.sg_ssh.id, aws_security_group.sg_web.id]
+  key_name = var.instance_keypair
   tag_specifications {
     resource_type = "instance"
     tags = {
