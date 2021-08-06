@@ -14,6 +14,12 @@ module "instance_sg" {
       protocol    = "tcp"
       to_port     = 22
     },
+    {
+    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 9100
+    protocol    = "tcp"
+    to_port     = 9100
+    },
   ]
 }
 
