@@ -3,5 +3,5 @@ output "instance" {
 }
 
 output "host_name" {
-    value = module.ec2_instance.*.public_dns
+  value = module.ec2_instance.*.public_dns
 }

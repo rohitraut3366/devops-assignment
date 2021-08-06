@@ -27,7 +27,6 @@ variable "vpc_id" {
 }
 
 variable "security_group_name" {
-  default = "security-goup"
 }
 
 variable "security_group_description" {

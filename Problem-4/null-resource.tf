@@ -1,12 +1,13 @@
 resource "null_resource" "ansible_configuration" {
   depends_on = [
-    module.ec2_instance
+    module.ec2_instance,
+    module.rds_mysql_instance
   ]
-  count = module.ec2_instance.count
+  count = var.instance_count
   provisioner "remote-exec" {
     connection {
       type        = "ssh"
-      host        = "${module.ec2_instance.*.public_dns[0][count.index]}"
+      host        = module.ec2_instance.*.public_dns[count.index][0]
       user        = "ubuntu"
       private_key = file("ansible-cm/devops.pem")
     }
@@ -14,6 +15,6 @@ resource "null_resource" "ansible_configuration" {
   }
 
   provisioner "local-exec" {
-    command = "echo -e 'database: \"${var.rds_initial_database_name}\" \ndatabase_user:  \"${var.rds_database_username}\" \ndatabase_user_password: \"${var.rds_database_user_password}\" \nhostname: \"${aws_db_instance.rds_instace.address}\"' > ansible-cm/database_config_variables;  cd ansible-cm; ansible-playbook setup.yml;"
+    command = "echo -e 'database: \"${module.rds_mysql_instance.rds_initial_database_name}\" \ndatabase_user:  \"${module.rds_mysql_instance.rds_database_username}\" \ndatabase_user_password: \"${module.rds_mysql_instance.rds_database_user_password}\" \nhostname: \"${module.rds_mysql_instance.rds_address}\"' > ansible-cm/database_config_variables;  cd ansible-cm; ansible-playbook setup.yml;"
   }
 }

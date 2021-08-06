@@ -15,6 +15,6 @@ module "rds_mysql_instance" {
   rds_skip_final_snapshot                  = true
   rds_vpc_security_group_ids               = ["${module.rds_sg.security_group_id}"]
   tags = {
-      Name = "wordpress-backend-mysql"
+    Name = "wordpress-backend-mysql"
   }
 }
