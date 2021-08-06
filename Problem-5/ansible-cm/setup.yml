@@ -1,0 +1,9 @@
+- hosts: tag_Name_ec2_webserver
+  vars_files: database_config_variables
+  roles:  
+    - role: nginx-wordpress
+    - role: node_exporter
+
+- hosts: tag_Name_prometheus_server
+  roles:
+  - role: prometheus
