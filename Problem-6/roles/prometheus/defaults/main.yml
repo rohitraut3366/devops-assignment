@@ -1,0 +1,18 @@
+---
+# defaults file for prometheus
+prometheus_version: '2.27.1'
+prometheus_arch: 'amd64'
+
+
+software_file_url: "https://github.com/prometheus/prometheus/releases/download/v{{ prometheus_version }}/prometheus-{{ prometheus_version }}.linux-{{ prometheus_arch }}.tar.gz"
+
+user_name: "prometheus"
+
+configuration_directories: ["/etc/prometheus", "/var/lib/prometheus"]
+
+lib_files: ["prometheus-{{ prometheus_version }}.linux-{{ prometheus_arch }}/prometheus", "prometheus-{{ prometheus_version }}.linux-{{ prometheus_arch }}/promtool"]
+  
+console_lib: ["prometheus-{{ prometheus_version }}.linux-{{ prometheus_arch }}/consoles", "prometheus-{{ prometheus_version }}.linux-{{ prometheus_arch }}/console_libraries"]
+
+config_file: "prometheus-{{ prometheus_version }}.linux-{{ prometheus_arch }}/prometheus.yml"
+

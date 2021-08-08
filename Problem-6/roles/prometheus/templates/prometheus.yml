@@ -1,0 +1,19 @@
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+    - targets: ['{{ prometheus_public_ip }}:9090']
+
+  - job_name: 'ec2'
+    metrics_path: '/metrics'
+    ec2_sd_configs:
+       - region: "ap-south-1"
+         port: 9100
+         filters:
+           - name: tag:Name
+             values:
+                - ec2-webserver
