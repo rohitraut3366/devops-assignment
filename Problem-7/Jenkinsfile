@@ -1,6 +1,14 @@
 pipeline{
     agent { 
-        label "packer"
+        docker {
+            image 'rohitraut3366/packer:v1'
+            args '-v /home/rohitraut/.aws:/root/.aws'
+        }
+    }
+    parameters {
+        string(name: 'ASG_DESIRED_SIZE', description: 'Desired Number of instances in auto scaling group')
+        string(name: 'ASG_MAX_SIZE',description: "Maximum size of auto scaling group")
+        string(name: 'ASG_MIN_SIZE',description: "Minimum size of auto scaling group")
     }
     stages{
         stage("gitscm"){
@@ -22,7 +30,10 @@ pipeline{
         }
         stage("Terraform Apply"){
             steps{
-                sh "terraform apply --auto-approve"
+                sh "terraform apply --auto-approve \
+                   -var asg_min_capacity=${ASG_MIN_SIZE} \
+                   -var asg_max_capacity=${ASG_MAX_SIZE} \
+                   -var asg_desired_capacity=${ASG_DESIRED_SIZE}"
             }
             post{
                 success{
