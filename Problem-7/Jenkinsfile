@@ -1,9 +1,6 @@
 pipeline{
     agent { 
-        docker {
-            image 'rohitraut3366/packer:v1'
-            args '-v /home/rohitraut/.aws:/root/.aws'
-        }
+        label "packer"
     }
     parameters {
         string(name: 'ASG_DESIRED_SIZE', description: 'Desired Number of instances in auto scaling group')
