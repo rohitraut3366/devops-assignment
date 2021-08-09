@@ -5,7 +5,7 @@ pipeline{
     stages{
         stage("gitscm"){
             steps{
-                echo "Build Started"
+                sh "echo Build Started"
                 git branch: 'master', url: 'https://github.com/rohitraut3366/terraform-packer-build.git'
             }
         }
