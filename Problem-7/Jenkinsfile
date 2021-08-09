@@ -6,7 +6,7 @@ pipeline{
         stage("gitscm"){
             steps{
                 echo "Build Started"
-                git branch: 'master', url: 'https://github.com/rohitraut3366/packer-aws-ami.git'
+                git branch: 'master', url: 'https://github.com/rohitraut3366/terraform-packer-build.git'
             }
         }
         stage("Terraform init"){
