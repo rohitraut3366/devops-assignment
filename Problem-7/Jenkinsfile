@@ -14,6 +14,15 @@ pipeline{
                 git branch: 'master', url: 'https://github.com/rohitraut3366/terraform-packer-build.git'
             }
         }
+        stage("Build remote Backend"){
+            steps{
+                sh "echo backend build started"
+                sh "terraform -chdir=terraform-remote-state init"
+                sh "terraform -chdir=terraform-remote-state plan"
+                sh "terraform -chdir=terraform-remote-state apply --auto-approve"
+                sh "echo backend build finish"
+            }
+        }
         stage("Terraform init"){
             steps{
                 sh "chmod 400 packer-build/devops.pem"
