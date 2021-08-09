@@ -28,9 +28,9 @@ pipeline{
         stage("Terraform Apply"){
             steps{
                 sh "terraform apply --auto-approve \
-                   -var asg_min_capacity=${ASG_MIN_SIZE} \
-                   -var asg_max_capacity=${ASG_MAX_SIZE} \
-                   -var asg_desired_capacity=${ASG_DESIRED_SIZE}"
+                   -var asg_min_capacity=${params.ASG_MIN_SIZE} \
+                   -var asg_max_capacity=${params.ASG_MAX_SIZE} \
+                   -var asg_desired_capacity=${params.ASG_DESIRED_SIZE}"
             }
             post{
                 success{
