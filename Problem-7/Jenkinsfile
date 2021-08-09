@@ -1,0 +1,35 @@
+pipeline{
+    agent { 
+        label "packer"
+    }
+    stages{
+        stage("gitscm"){
+            echo "Build Started"
+            git branch: 'master', url: 'https://github.com/rohitraut3366/packer-aws-ami.git'
+        }
+        stage("Terraform init"){
+            steps{
+                sh "chmod 400 packer-build/devops.pem"
+                sh "terraform init"
+            }
+        }
+        stage("Terraform Plan"){
+            steps{
+                sh "terraform plan"
+            }
+        }
+        stage("Terraform Apply"){
+            steps{
+                sh "terraform apply --auto-approve"
+            }
+            post{
+                success{
+                    echo "executed successfully"
+                }
+                failure{
+                    echo "execution failed"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,74 @@
+---
+# tasks file for prometheus
+- name: Update apt-get repo and cache
+  apt: update_cache=yes force_apt_get=yes
+  changed_when: false
+  failed_when: false
+  ignore_errors: true
+
+- name: unarchive wordpress file
+  unarchive:
+    src: "{{ software_file_url }}" 
+    dest: .
+    remote_src: true
+
+- name: Add prometheus system user
+  user:
+    name: "{{ user_name }}"
+    system: true
+    create_home: false
+    shell: "/sbin/nologin"
+
+- name: create configuration file directory
+  file:
+    name: "{{ item }}"
+    state: directory
+    recurse: true
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+  loop: "{{ configuration_directories }}"
+
+- name: Copy prometheus config file
+  copy: 
+    src: prometheus.yml
+    remote_src: true
+    dest: "/etc/prometheus/"
+  notify: "restart prometheus service"
+
+- name: copying lib files
+  copy:
+    src: "{{ item }}"
+    remote_src: true
+    dest: "/usr/local/bin/"
+    owner: "{{ user_name }}"
+    group: "{{ user_name }}"
+    mode: "0775"
+  loop: "{{ lib_files }}"
+
+- name: copying console files to library directory
+  copy:
+    src: "{{ item }}"
+    remote_src: true
+    dest: "/etc/prometheus/"
+  loop: "{{ console_lib }}"
+
+
+- name: Copy the prometheus systemd unit file.
+  copy:
+    src: prometheus.service
+    dest: "/etc/systemd/system/"
+  register: prometheus_service
+
+- name: Reload systemd daemon if unit file is changed.
+  systemd:
+    daemon_reload: true
+  notify: restart node_exporter
+  when: prometheus_service is changed
+
+- name: start and enable prometheus service
+  service:
+    name: "prometheus"
+    state: started
+    enabled: true
+
+

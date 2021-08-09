@@ -1,0 +1,4 @@
+- hosts: tag_Name_Wordpress_1
+  roles:  
+    - role: nginx-wordpress
+    - role: node_exporter
