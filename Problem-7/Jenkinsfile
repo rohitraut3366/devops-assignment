@@ -4,8 +4,10 @@ pipeline{
     }
     stages{
         stage("gitscm"){
-            echo "Build Started"
-            git branch: 'master', url: 'https://github.com/rohitraut3366/packer-aws-ami.git'
+            steps{
+                echo "Build Started"
+                git branch: 'master', url: 'https://github.com/rohitraut3366/packer-aws-ami.git'
+            }
         }
         stage("Terraform init"){
             steps{
