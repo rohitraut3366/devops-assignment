@@ -10,3 +10,4 @@ rds_max_allocated_storage                = 1000
 rds_db_engine_auto_minor_version_upgrade = true
 rds_delete_automated_backups             = true
 rds_database_publicly_access             = true
+rds_skip_final_snapshot                  = true

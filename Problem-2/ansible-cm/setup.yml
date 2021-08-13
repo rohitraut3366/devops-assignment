@@ -1,9 +1,9 @@
-- hosts: all
-  vars_files: rds_database_password
+- hosts: tag_Name_ec2-webserver 
+  vars_files: database_config_variables
   roles:  
-    - role: wordpress
+    - role: nginx-wordpress
       vars:
-        - database: "wordpress_db"
-        - database_user: "root"
+        - database: "{{ database }}"
+        - database_user: "{{ database_user }}"
         - database_user_password: "{{ database_password }}"
-        - hostname: "terraform-20210803123134985600000001.chrpy8wuqlfu.ap-south-1.rds.amazonaws.com"
+        - hostname: "{{ hostname }}"

@@ -67,7 +67,13 @@ variable "rds_database_publicly_access" {
 }
 
 variable "rds_delete_automated_backups" {
-  description = "value"
+  description = "rds_delete_automated_backups"
   type        = bool
   default     = false
+}
+
+variable "rds_skip_final_snapshot" {
+  description = "rds_skip_final_snapshot"
+  type = bool
+  default = false
 }
