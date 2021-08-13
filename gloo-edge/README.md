@@ -20,4 +20,4 @@ kubectl expose deployment basic-flask --type=ClusterIP --port=5000
 Gloo-Edge continuously monitoring all services in clusters, and it creates upstream(end service)
 `glooctl get upstream`
 
-<img src="./Images/img1.png" alt="Image" style="float: left; margin-right: 10px;" />
+<img src="https://raw.githubusercontent.com/rohitraut3366/devops-assignment/master/gloo-edge/Images/img1.png" alt="Image" style="float: left; margin-right: 10px;" />
