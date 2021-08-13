@@ -41,3 +41,7 @@ I used jmeter tool to test How many requests one envoy's pod can handle.
 In this repository I have given `HTTTP request.jmx` file. Only you have to open in jemter.
 
 <img src="https://raw.githubusercontent.com/rohitraut3366/devops-assignment/master/gloo-edge/Images/img5.png" alt="Image" style="float: left; margin-right: 10px;" />
+
+
+## conclusion:
+1. One gateway Proxy pod can handle around 1000-1024 requests.
