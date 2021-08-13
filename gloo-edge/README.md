@@ -24,8 +24,8 @@ Gloo-Edge continuously monitoring all services in clusters, and it creates upstr
 <img src="https://raw.githubusercontent.com/rohitraut3366/devops-assignment/master/gloo-edge/Images/img1.png" alt="Image" style="float: left; margin-right: 10px;" />
 
 - Now we need to add routes to endpoint and there are two way
-  * By create Virtual Service
-  * By using command glooctl (behind the scene creates a virtual service)
+  * create Virtual Service
+  * Using command glooctl (behind the scene creates a virtual service)
   
 <img src="https://raw.githubusercontent.com/rohitraut3366/devops-assignment/master/gloo-edge/Images/img2.png" alt="Image" style="float: left; margin-right: 10px;" />
 <img src="https://raw.githubusercontent.com/rohitraut3366/devops-assignment/master/gloo-edge/Images/img3.png" alt="Image" style="float: left; margin-right: 10px;" />
